@@ -2,7 +2,7 @@
 class NpmPackage
 {
     [DscProperty()]
-    [Ensure]$Ensure
+    [Ensure]$Ensure = [Ensure]::Present
 
     [DscProperty(Key)]
     [string]$Name
@@ -25,21 +25,13 @@ class NpmPackage
 
         if (-not([string]::IsNullOrEmpty($this.PackageDirectory)))
         {
-            if (Test-Path -Path $this.PackageDirectory -PathType Container)
-            {
-                Set-Location -Path $this.PackageDirectory
-            }
-            else
-            {
-                throw "$($this.PackageDirectory) does not point to a valid directory."
-            }
+            Set-PackageDirectory -PackageDirectory $this.PackageDirectory
         }
 
         $currentState = [NpmPackage]::new()
         $currentState.Ensure = [Ensure]::Absent
 
-        $installedPackages = Get-InstalledNpmPackages -Global $this.global | ConvertFrom-Json | Select-Object -ExpandProperty dependencies
-
+        $installedPackages = Get-InstalledNpmPackages -Global $this.Global | ConvertFrom-Json | Select-Object -ExpandProperty dependencies
         if ($installedPackages.PSobject.Properties.Name -contains $this.Name)
         {
             $installedPackage = $installedPackages | Select-Object -ExpandProperty $this.Name

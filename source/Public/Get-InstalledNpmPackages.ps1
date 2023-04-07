@@ -14,5 +14,5 @@ function Get-InstalledNpmPackages
         $command.Add('-g')
     }
 
-    Invoke-Npm -command $command
+    return Invoke-Npm -command $command
 }

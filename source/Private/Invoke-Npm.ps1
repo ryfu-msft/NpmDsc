@@ -7,10 +7,10 @@ function Invoke-Npm
 
     if ($useNpmCmd)
     {
-        return & $defaultNpmCmdPath $Command
+        return Invoke-Expression -Command "& '$defaultNpmCmdPath' $Command"
     }
     else
     {
-        return npm $Command
+        return Invoke-Expression -Command "npm $Command"
     }
 }
