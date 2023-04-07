@@ -98,7 +98,7 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            Tags = @('PSDscResource_DSC_NpmPackage', 'PSDscResource_DSC_NpmInstall')
+            Tags = @('PSDscResource_NpmPackage', 'PSDscResource_NpmInstall')
 
             # A URL to the license for this module.
             # LicenseUri = ''

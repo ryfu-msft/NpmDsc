@@ -2,11 +2,11 @@ $useNpmCmd = $false
 $defaultNpmCmdPath = "$env:ProgramFiles\nodejs\npm.cmd"
 function Assert-Npm
 {
-    # Try invoking npm help with the alias. If it fails, switch to calling npm.cmd directly.
+    # Try calling Start-Process with 'npm help' using the alias. If it fails, switch to calling npm.cmd directly.
     # This may occur if npm is installed in the same shell window and the alias is not updated until the shell window is restarted.
     try
     {
-        Invoke-Npm -command 'help'
+        Start-Process -FilePath npm -ArgumentList 'help' -Wait -PassThru -WindowStyle hidden
         return
     }
     catch
