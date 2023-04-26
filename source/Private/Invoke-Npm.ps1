@@ -5,12 +5,5 @@ function Invoke-Npm
         [string]$Command
     )
 
-    if ($useNpmCmd)
-    {
-        return Invoke-Expression -Command "& '$defaultNpmCmdPath' $Command"
-    }
-    else
-    {
-        return Invoke-Expression -Command "npm $Command"
-    }
+    return Invoke-Expression -Command "npm $Command"
 }
