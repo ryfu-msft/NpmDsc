@@ -1,3 +1,5 @@
+using namespace System.Collections.Generic
+
 function Install-NpmPackage
 {
     param (
@@ -8,12 +10,23 @@ function Install-NpmPackage
         [bool]$Global,
 
         [Parameter()]
+        [bool]$Version,
+
+        [Parameter()]
         [string]$Arguments
     )
 
     $command = [List[string]]::new()
     $command.Add("install")
-    $command.Add($PackageName)
+
+    if ($Version)
+    {
+        $command.Add($PackageName + '@' + $Version)
+    }
+    else
+    {
+        $command.Add($PackageName)
+    }
 
     if ($Global)
     {

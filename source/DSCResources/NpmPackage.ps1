@@ -72,7 +72,7 @@ class NpmPackage
         {
             if (-not $inDesiredState)
             {
-                Install-NpmPackage -PackageName $this.Name -Arguments $this.Arguments -Global $this.Global
+                Install-NpmPackage -PackageName $this.Name -Version $this.Version -Arguments $this.Arguments -Global $this.Global
             }
         }
         else
